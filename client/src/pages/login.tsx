@@ -2,14 +2,15 @@ import { useLogin } from "@refinedev/core";
 import { useEffect, useRef } from "react";
 
 import { Box, Container, Typography } from "@mui/material";
-
+import { yariga } from "assets";
 
 import { CredentialResponse } from "../interfaces/google";
 import { Title } from "components";
 
 // Todo: Update your Google Client ID here
 const GOOGLE_CLIENT_ID =
-  "1041339102270-jlljcjl19jo1hkgf695em3ibr7q2m734.apps.googleusercontent.com";
+ "1041339102270-jlljcjl19jo1hkgf695em3ibr7q2m734.apps.googleusercontent.com";
+//const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 
 export const Login: React.FC = () => {
   const { mutate: login } = useLogin<CredentialResponse>();
@@ -47,8 +48,10 @@ export const Login: React.FC = () => {
 
   return (
     <Container
+      sx={{ backgroundColor: "#fcfcfc" }}
       style={{
         height: "100vh",
+        width: "100vw",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -69,7 +72,7 @@ export const Login: React.FC = () => {
         />
 
         <GoogleButton />
-
+        {/* 
         <Typography align="center" color={"text.secondary"} fontSize="12px">
           Powered by
           <img
@@ -78,7 +81,7 @@ export const Login: React.FC = () => {
             src="https://refine.ams3.cdn.digitaloceanspaces.com/superplate-auth-icons%2Fgoogle.svg"
           />
           Google
-        </Typography>
+        </Typography> */}
       </Box>
     </Container>
   );
