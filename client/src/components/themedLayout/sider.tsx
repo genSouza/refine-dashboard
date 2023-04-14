@@ -23,6 +23,7 @@ import {
   ExpandMore,
   ChevronLeft,
   Dashboard,
+  ChevronRight,
 } from "@mui/icons-material";
 import {
   Box,
@@ -35,6 +36,7 @@ import {
   Tooltip,
   IconButton,
   Paper,
+  Button,
 } from "@mui/material";
 import type { RefineThemedLayoutV2SiderProps } from "@refinedev/mui";
 
@@ -154,7 +156,7 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
                     primary={label}
                     primaryTypographyProps={{
                       noWrap: true,
-                      fontSize: "14px",
+                      fontSize: "16px",
                     }}
                   />
                   {isOpen ? (
@@ -212,7 +214,16 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
                 pl: isNested ? 4 : 2,
                 py: isNested ? 1.25 : 1,
                 justifyContent: "center",
-                color: isSelected ? "primary.main" : "text.primary",
+                margin: "10px auto",
+                borderRadius: "12px",
+                minHeight: "56px",
+                width: "90%",
+                "&.Mui-selected": {
+                  "&:hover": {
+                    backgroundColor: isSelected ? "#1e36e8" : "transparent",
+                  },
+                  backgroundColor: isSelected ? "#475be8" : "transparent",
+                },
               }}
             >
               <ListItemIcon
@@ -221,7 +232,7 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
                   transition: "margin-right 0.3s",
                   marginRight: drawerSiderVisible ? "12px" : "0px",
                   minWidth: "24px",
-                  color: "currentColor",
+                  color: isSelected ? "#fff" : "#808191",
                 }}
               >
                 {icon ?? <ListOutlined />}
@@ -230,7 +241,10 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
                 primary={label}
                 primaryTypographyProps={{
                   noWrap: true,
-                  fontSize: "14px",
+                  fontSize: "16px",
+                  fontWeight: isSelected ? "bold" : "normal",
+                  color: isSelected ? "#fff" : "#808191",
+                  marginLeft: "10px",
                 }}
               />
             </ListItemButton>
@@ -278,7 +292,7 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
             primary={translate("dashboard.title", "Dashboard")}
             primaryTypographyProps={{
               noWrap: true,
-              fontSize: "14px",
+              fontSize: "16px",
             }}
           />
         </ListItemButton>
@@ -316,6 +330,10 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
         onClick={() => handleLogout()}
         sx={{
           justifyContent: "center",
+          margin: "10px auto",
+          borderRadius: "12px",
+          minHeight: "56px",
+          width: "90%",
         }}
       >
         <ListItemIcon
@@ -324,7 +342,7 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
             minWidth: "24px",
             transition: "margin-right 0.3s",
             marginRight: drawerSiderVisible ? "12px" : "0px",
-            color: "currentColor",
+            color: "#808191",
           }}
         >
           <Logout />
@@ -333,7 +351,7 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
           primary={t("buttons.logout", "Logout")}
           primaryTypographyProps={{
             noWrap: true,
-            fontSize: "14px",
+            fontSize: "16px",
           }}
         />
       </ListItemButton>
@@ -366,6 +384,7 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
       sx={{
         flexGrow: 1,
         paddingTop: "16px",
+        color: "#808191",
       }}
     >
       {renderSider()}
@@ -434,6 +453,7 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
             "& .MuiDrawer-paper": {
               width: drawerWidth(),
               overflow: "hidden",
+              bgcolor: "#F5FCFC",
               transition: "width 200ms cubic-bezier(0.4, 0, 0.6, 1) 0ms",
             },
           }}
@@ -457,14 +477,6 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
             }}
           >
             <RenderToTitle collapsed={!drawerSiderVisible} />
-            {drawerSiderVisible && (
-              <IconButton
-                size="small"
-                onClick={() => setDrawerSiderVisible?.(false)}
-              >
-                {<ChevronLeft />}
-              </IconButton>
-            )}
           </Paper>
           <Box
             sx={{
@@ -475,6 +487,23 @@ export const Sider: React.FC<RefineThemedLayoutV2SiderProps> = ({
           >
             {drawer}
           </Box>
+          <Button
+            sx={{
+              background: "#475BE8",
+              color: "primary.contrastText",
+              textAlign: "center",
+              borderRadius: 0,
+              borderTop: "1px solid #ffffff1a",
+              "&:hover": {
+                background: "#1e36e8",
+              },
+            }}
+            fullWidth
+            size="large"
+            onClick={() => setDrawerSiderVisible?.(!drawerSiderVisible)}
+          >
+            {!drawerSiderVisible ? <ChevronRight /> : <ChevronLeft />}
+          </Button>
         </Drawer>
       </Box>
     </>
