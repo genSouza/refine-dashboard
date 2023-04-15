@@ -1,9 +1,4 @@
-import {
-  AuthBindings,
-  Authenticated,
-  GitHubBanner,
-  Refine,
-} from "@refinedev/core";
+import { AuthBindings, Authenticated, Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import {
@@ -34,13 +29,30 @@ import {
   CategoryShow,
 } from "pages/categories";
 import { Login } from "pages/login";
+import { Home } from "pages/home";
+import { Agents, AgentProfile } from "pages/agents";
+import { MyProfile } from "pages/profile";
+import {
+  AllProperties,
+  PropertyDetails,
+  CreateProperty,
+  EditProperty,
+} from "pages/properties";
+
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { parseJwt } from "utils/parse-jwt";
-
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { Header, Sider, ThemedLayoutV2, Title } from "components";
-
+import { MuiInferencer } from "@refinedev/inferencer/mui";
+import {
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  Dashboard,
+  PeopleAltOutlined,
+  StarOutlineRounded,
+  VillaOutlined,
+} from "@mui/icons-material";
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
   const token = localStorage.getItem("token");
@@ -155,23 +167,39 @@ function App() {
               i18nProvider={i18nProvider}
               resources={[
                 {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
+                  name: "dashboard",
+                  list: "/",
                   meta: {
-                    canDelete: true,
+                    label: "Dashboard",
+                    icon: <Dashboard />,
                   },
                 },
                 {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
-                  meta: {
-                    canDelete: true,
+                  name: "property",
+                  list: MuiInferencer,
+                  icon: <VillaOutlined />,
+                },
+                {
+                  name: "agent",
+                  list: MuiInferencer,
+                  icon: <PeopleAltOutlined />,
+                },
+                {
+                  name: "review",
+                  list: MuiInferencer,
+                  icon: <StarOutlineRounded />,
+                },
+                {
+                  name: "message",
+                  list: MuiInferencer,
+                  icon: <ChatBubbleOutline />,
+                },
+                {
+                  name: "my-profile",
+                  list: MuiInferencer,
+                  options: {
+                    label: "My Profile",
+                    icon: <AccountCircleOutlined />,
                   },
                 },
               ]}
