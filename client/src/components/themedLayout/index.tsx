@@ -34,7 +34,8 @@ export const ThemedLayoutV2: React.FC<RefineThemedLayoutV2Props> = ({
             sx={{
               p: { xs: 1, md: 2, lg: 3 },
               flexGrow: 1,
-              bgcolor: (theme) => theme.palette.background.default,
+              // bgcolor: (theme) => theme.palette.background.default,
+              bgcolor: "#F0F0F0",
             }}
           >
             {children}
