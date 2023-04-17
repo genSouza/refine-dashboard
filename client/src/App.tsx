@@ -175,28 +175,32 @@ function App() {
                   },
                 },
                 {
-                  name: "property",
-                  list: MuiInferencer,
+                  name: "properties",
+                  list: AllProperties,
+                  show: PropertyDetails,
+                  create: CreateProperty,
+                  edit: EditProperty,
                   icon: <VillaOutlined />,
                 },
                 {
-                  name: "agent",
-                  list: MuiInferencer,
+                  name: "agents",
+                  list: Agents,
+                  show: AgentProfile,
                   icon: <PeopleAltOutlined />,
                 },
                 {
-                  name: "review",
-                  list: MuiInferencer,
+                  name: "reviews",
+                  list: Home,
                   icon: <StarOutlineRounded />,
                 },
                 {
-                  name: "message",
-                  list: MuiInferencer,
+                  name: "messages",
+                  list: Home,
                   icon: <ChatBubbleOutline />,
                 },
                 {
                   name: "my-profile",
-                  list: MuiInferencer,
+                  list: MyProfile,
                   options: {
                     label: "My Profile",
                     icon: <AccountCircleOutlined />,
@@ -223,6 +227,12 @@ function App() {
                   }
                 >
                   <Route index element={<Home />} />
+                  <Route path="/properties">
+                    <Route index element={<AllProperties />} />
+                    <Route path="create" element={<CreateProperty />} />
+                    <Route path=":id" element={<PropertyDetails />} />
+                    <Route path="edit/:id" element={<EditProperty />} />
+                  </Route>
                 </Route>
                 <Route
                   element={
